@@ -1,0 +1,30 @@
+﻿@page
+@model Web.Pages.Products.IndexModel
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Model</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>Depth</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model.Products)
+        {
+            <tr>
+                <td>@p.Code</td>
+                <td>@p.Model</td>
+                <td>@p.Width mm</td>
+                <td>@p.Height mm</td>
+                <td>@p.Depth mm</td>
+            </tr>
+        }
+    </tbody>
+</table>
