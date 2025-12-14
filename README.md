@@ -40,6 +40,9 @@ REST endpoint naj sprejme celo število med 1 in 7 ter vrne ime dneva v tednu pr
 <h3>SQL poizvedbe</h3>
 
 Na Podlagi ER diagrama (ni prikazan) spišite SQL stavke, ki bodo vrnili:
+
 ⦁	Vse naslove knjig avtorja “J.K. Rowling”, ki so na zalogi v vsaj enem skladišču
+
 ⦁	Vse naslove knjig, katere ima stranka “Beli Zajec” v shopping basketu in je cena knjige večja od 52,2 EUR.
+
 ⦁	Vse knjige, ki so bile kupljene več kot 11 krat 
