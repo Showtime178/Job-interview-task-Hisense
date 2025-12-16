@@ -14,11 +14,13 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen(c =>
 {
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "API za dneve v tednu",
-        Version = "v1",
-        Description = "API kateri trenutno vrača samo dneve v tednu v angleščini."
+        Version = "v1"
     });
 });
 
@@ -31,7 +33,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API za dneve v tednu");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API za imena dnevov v tednu");
     });
 }
 
