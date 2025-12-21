@@ -28,9 +28,48 @@
                 <td>@p.Width mm</td>
                 <td>@p.Height mm</td>
                 <td>@p.Depth mm</td>
-                <td><a class="btn btn-primary btn-sm hisense-button" href="/Products/Edit?code=@p.Code">Uredi</a></td>
-                <td><a class="btn btn-primary btn-sm btn-danger" href="/Products/Delete?code=@p.Code">Izbriši</a></td>
+                <td><a class="btn btn-primary btn-sm hisense-button" onclick="openProductModal('Edit', '@p.Code')">Uredi</a></td>
+                <td><a class="btn btn-primary btn-sm btn-danger" onclick="openProductModal('Delete', '@p.Code')">Izbriši</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content" id="productModalContent">
+        </div>
+    </div>
+</div>
+
+<script>
+    function openProductModal(type, code) {
+        fetch(`/Products/${type}?code=${code}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("productModalContent").innerHTML = html;
+                new bootstrap.Modal(document.getElementById("productModal")).show();
+            });
+    }
+
+    document.addEventListener("submit", function (e) {
+    if (e.target.matches("form[action='/Products/Edit']")) {
+        e.preventDefault();
+
+        fetch(e.target.action, {
+            method: "POST",
+            body: new FormData(e.target)
+        })
+        .then(response => response.text())
+        .then(html => {
+            if (html.includes("alert-danger") || html.includes("alert-warning")) {
+                // error → re-render modal
+                document.getElementById("productModalContent").innerHTML = html;
+            } else {
+                // success → reload page
+                location.reload();
+            }
+        });
+    }
+    });
+</script>

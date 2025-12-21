@@ -43,7 +43,8 @@ namespace Web.Pages.Products
             if (!ModelState.IsValid)
             {
                 WarningMessage = "Prosim izpolnite vsa polja";
-                return Page();
+                Product = _repository.GetItemById(Product.Code);
+                return Partial("EditModal", this);
             }
 
             var updatedProduct = new Product
@@ -60,7 +61,8 @@ namespace Web.Pages.Products
             if (!ok)
             {
                 ErrorMessage = "Produkt z to šifro ni bil najden.";
-                return Page();
+                Product = _repository.GetItemById(Product.Code);
+                return Partial("EditModal", this);
             }
 
             return RedirectToPage("/Products/Index");

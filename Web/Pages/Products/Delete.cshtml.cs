@@ -7,8 +7,6 @@ namespace Web.Pages.Products
 {
     public class DeleteModel : PageModel
     {
-        public string? ErrorMessage { get; set; }
-
         private readonly IRepository<Product> _repository;
 
         [BindProperty]
@@ -39,8 +37,7 @@ namespace Web.Pages.Products
 
             if (!ok)
             {
-                ErrorMessage = "Produkt z to šifro ni bil najden.";
-                return Page();
+                return NotFound();
             }
 
             return RedirectToPage("/Products/Index");
