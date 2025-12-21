@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Infrastructure.Models;
 
 namespace Infrastructure.Repositories
 {
     public interface IRepository<T>
     {
-        void Create(T entity);
+        RepositoryResult Create(T entity);
 
         T? GetItemById(string id);
 
