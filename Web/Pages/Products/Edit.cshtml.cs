@@ -7,6 +7,9 @@ namespace Web.Pages.Products
 {
     public class EditModel : PageModel
     {
+        public string? WarningMessage { get; set; }
+        public string? ErrorMessage { get; set; }
+
         private readonly IRepository<Product> _repository;
 
         [BindProperty]
@@ -39,6 +42,7 @@ namespace Web.Pages.Products
         {
             if (!ModelState.IsValid)
             {
+                WarningMessage = "Prosim izpolnite vsa polja";
                 return Page();
             }
 
@@ -53,9 +57,10 @@ namespace Web.Pages.Products
 
             var ok = _repository.Update(Product.Code, updatedProduct);
 
-            if (!ok) 
+            if (!ok)
             {
-                return NotFound();
+                ErrorMessage = "Produkt z to šifro ni bil najden.";
+                return Page();
             }
 
             return RedirectToPage("/Products/Index");

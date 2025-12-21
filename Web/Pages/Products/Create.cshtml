@@ -6,6 +6,16 @@
 
 <h3>Dodaj izdelek</h3>
 
+@if (Model.ErrorMessage is not null)
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
+@if (Model.WarningMessage is not null)
+{
+    <div class="alert alert-warning">@Model.WarningMessage</div>
+}
+
 <form method="post">
     @Html.AntiForgeryToken()
 

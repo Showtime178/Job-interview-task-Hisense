@@ -11,15 +11,20 @@ namespace Infrastructure.Repositories
         /// <summary>
         ///Kreiraj novi izdelek, če je šifra že v rabi vrži exception
         /// </summary>
-        public void Create (Product product) 
+        public RepositoryResult Create (Product product) 
         {
             if (!InMemoryDatabase.Products.Any(x => x.Code == product.Code))
             {
                 InMemoryDatabase.Products.Add(product);
+                return new RepositoryResult { Success = true };
             }
             else
             {
-                throw new ArgumentException("Tale šifra je že v rabi.", "Code");
+                return new RepositoryResult
+                {
+                    Success = false,
+                    Message = "Tale šifra je že v rabi."
+                };
             }
         }
 

@@ -6,6 +6,11 @@
 
 <h3>Izbriši izdelek</h3>
 
+@if (Model.ErrorMessage is not null)
+{
+    <div class="alert alert-danger">@Model.ErrorMessage</div>
+}
+
 @if (Model.Product != null)
 {
     <p>A ste prepričani da želite izbrisati <strong>@Model.Product.Code</strong>?</p>
